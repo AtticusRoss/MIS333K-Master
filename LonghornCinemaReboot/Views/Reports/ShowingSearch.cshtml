@@ -1,0 +1,49 @@
+﻿@using LonghornCinemaReboot.Controllers;
+@{
+    ViewBag.Title = "ShowingSearch";
+}
+
+<h2>Movie Search</h2>
+
+<div class="text-danger">@ViewBag.Message</div>
+
+@using (Html.BeginForm("DisplaySearchResults", "Reports", FormMethod.Get))
+{
+<p class="form-group">
+    <!--Date picker for year-->
+    <div class="form-group">
+        Starting Time: <input type="date" name="datStartTime" class="form-control" /><br />
+    </div>
+
+    <!--Date picker for year-->
+    <div class="form-group">
+        Ending Time: <input type="date" name="datEndTime" class="form-control" /><br />
+    </div>
+
+    <!--Textbox for title-->
+    Start Date (by Day #): @Html.TextBox("strStartDate", null, new { @class = "form-control" })<br />
+
+    <!--Textbox for tagline-->
+    End Date (by Day #): @Html.TextBox("strEndDate", null, new { @class = "form-control" })<br />
+
+    <!--Multiselect list for genres-->
+    <div class="form-group">
+        <label class="control-label col-md-2">Movies</label>
+        <div class="col-md-10">
+            @Html.ListBox("SelectedMovies", (MultiSelectList)ViewBag.AllMovies, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <!--Multiselect list for MPAA rating-->
+    <div class="form-group">
+        <label class="control-label col-md-2">MPAA Rating</label>
+        <div class="col-md-10">
+            @Html.ListBox("SelectedMPAA", (MultiSelectList)ViewBag.AllMPAA, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <input type="submit" value="Search" class="btn btn-default" />
+</p>
+}
+

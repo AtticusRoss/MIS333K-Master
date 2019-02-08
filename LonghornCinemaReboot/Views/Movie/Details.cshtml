@@ -1,0 +1,147 @@
+﻿@model LonghornCinemaReboot.Models.Movie
+@using LonghornCinemaReboot.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+
+        <dd>
+            @foreach (Genre gen in Model.Genres)
+            {
+                @Html.DisplayFor(modelItem => gen.GenreName);
+                if (Model.Genres.IndexOf(gen) != Model.Genres.Count - 1)
+                {
+                    @Html.Raw(", ")
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MPAA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MPAA.MPAAName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Overview)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Overview)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tagline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tagline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RunTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RunTime)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h4>Showings</h4>
+
+    <table class="table table-sm table-striped table-hover">
+        <tr>
+            <th>Theater</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+        @foreach (Showing s in Model.Showings)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => s.TheaterID)</td>
+                <td>@Html.DisplayFor(modelItem => s.StartTime)</td>
+                <td>@Html.DisplayFor(modelItem => s.EndTime)</td>
+                <td>
+                    @Html.ActionLink("Purchase", "Create", "Orders", new { id = s.ShowingID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <h4>Reviews</h4>
+    <p>
+        @Html.ActionLink("Create New", "AddReview", new { MovieID = Model.MovieID })
+    </p>
+
+    <table class="table table-sm table-striped table-hover">
+        <tr>
+            <th>Rating</th>
+            <th>Review</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (Review r in Model.Reviews)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => r.CustRating)</td>
+                <td>@Html.DisplayFor(modelItem => r.TextReview)</td>
+                <!--<td>@Html.DisplayFor(modelItem => r.Votes)</td>-->
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Reviews", new { id = r.ReviewID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

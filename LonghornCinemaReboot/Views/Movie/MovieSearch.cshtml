@@ -1,0 +1,55 @@
+﻿@using LonghornCinemaReboot.Controllers;
+@{
+    ViewBag.Title = "MovieSearch";
+}
+
+<h2>Movie Search</h2>
+
+<div class="text-danger">@ViewBag.Message</div>
+
+@using (Html.BeginForm("DisplaySearchResults", "Movie", FormMethod.Get))
+{
+    <p class="form-group">
+        <!--Textbox for title-->
+        Title: @Html.TextBox("strSearchTitle", null, new { @class = "form-control" })<br />
+
+        <!--Textbox for tagline-->
+        Tagline: @Html.TextBox("strSearchTagline", null, new { @class = "form-control" })<br />
+
+        <!--Multiselect list for genres-->
+        <div class="form-group">
+            <label class="control-label col-md-2">Genres</label>
+            <div class="col-md-10">
+                @Html.ListBox("SelectedGenres", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!--Date picker for year-->
+        <div class="form-group">
+            Release Date: <input type="date" name="datSelectedDate" class="form-control" /><br />
+        </div>
+
+        <!--Multiselect list for MPAA rating-->
+        <div class="form-group">
+            <label class="control-label col-md-2">MPAA Rating</label>
+            <div class="col-md-10">
+                @Html.ListBox("SelectedMPAA", (MultiSelectList)ViewBag.AllMPAA, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!--Textbox and radio buttons for stars-->
+        <div class="form-group">
+            Customer Rating (1.0 to 5.0): @Html.TextBox("strRating", null, new { @class = "form-control" })
+            <label class="radio">@Html.RadioButton("enumSelectedCondition", Condition.Greater, true)Greater Than</label>
+            <label class="radio">@Html.RadioButton("enumSelectedCondition", Condition.Less)Less Than</label>
+        </div>
+
+        <!--Textbox for actors-->
+        <div class="form-group">
+            Actors (separate multiple actor names with a comma): @Html.TextBox("strSearchActor", null, new { @class = "form-control" })<br />
+        </div>
+
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
+

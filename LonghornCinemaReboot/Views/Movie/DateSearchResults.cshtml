@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LonghornCinemaReboot.Models.Showing>
+@using LonghornCinemaReboot.Models
+@{
+    ViewBag.Title = "DateSearchResults";
+}
+
+<h2>DateSearchResults</h2>
+
+@using (Html.BeginForm())
+{
+    <p class="form-group">
+        Search: @Html.TextBox("SearchString", null, new { @class = "form-control" }) <br />
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Detailed Search", "MovieSearch", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Showings Search", "DateSearch", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Show All", "DateSearchResults", null, new { @class = "btn btn-default" })
+    </p>
+}
+
+    Displaying @ViewBag.SelectedMovies of @ViewBag.TotalShowings Movies
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SelectedMovie.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelectedMovie.MPAA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelectedMovie.CustomerRating)
+            </th>
+            <th>
+                Seats Available
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelectedMovie.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelectedMovie.MPAA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelectedMovie.CustomerRating)
+            </td>
+        </tr>
+        }
+
+    </table>
+

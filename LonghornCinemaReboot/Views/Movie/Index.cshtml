@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LonghornCinemaReboot.Models.Movie>
+@using LonghornCinemaReboot.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <p class="form-group">
+        Search: @Html.TextBox("SearchString", null, new { @class = "form-control" }) <br />
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Detailed Search", "MovieSearch", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Showings Search", "DateSearch", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Show All", "Index", null, new { @class = "btn btn-default" })
+    </p>
+}
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+                     if (User.IsInRole("Manager"))
+                         {
+    <li>
+        <a href="/Movie/Create"><span>Create Movie</span></a>
+    </li>
+                        }
+                      }
+                    
+
+                        Displaying @ViewBag.SelectedMovies of @ViewBag.TotalMovies Movies
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MPAA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RunTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @foreach (Genre gen in item.Genres)
+                    {
+                        @Html.DisplayFor(modelItem => gen.GenreName);
+                        if (item.Genres.IndexOf(gen) != item.Genres.Count - 1)
+                        {
+                            @Html.Raw(", ")
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MPAA.MPAAName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RunTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieID })
+                </td>
+            </tr>
+        }
+
+    </table>

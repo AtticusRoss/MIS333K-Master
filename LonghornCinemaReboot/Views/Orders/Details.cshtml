@@ -1,0 +1,81 @@
+﻿@model LonghornCinemaReboot.Models.Order
+@using LonghornCinemaReboot.Models
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+    </dl>
+</div>
+
+<h4>Products</h4>
+<table class="table table-sm table-striped table-hover">
+    <tr>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Product Quantity</th>
+        <th>Total Cost</th>
+    </tr>
+    @foreach (Ticket t in Model.Tickets)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => t.Showing.SelectedMovie)</td>
+            <td>@Html.DisplayFor(modelItem => t.Showing.TheaterID)</td>
+            <td>@Html.DisplayFor(modelItem => t.Showing.StartTime)</td>
+            <td>@Html.DisplayFor(modelItem => t.Seat)</td>
+        </tr>
+    }
+</table>
+
+<table class="table table-sm table-bordered" style="width:30%">
+    <tr>
+        <th colspan="2" style="text-align:center">Order Summary</th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.OrderSubtotal)</td>
+        <td>@Html.DisplayFor(model => model.OrderSubtotal)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.SalesTax)</td>
+        <td>@Html.DisplayFor(model => model.SalesTax)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.OrderTotal)</td>
+        <td>@Html.DisplayFor(model => model.OrderTotal)</td>
+    </tr>
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

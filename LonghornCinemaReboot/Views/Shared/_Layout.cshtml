@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!-- Vendor Styles including: Bootstrap, Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="~/Content/site.css">
+    <!-- Main Template Styles-->
+    <link id="mainStyles" rel="stylesheet" media="screen" href="~/Content/site.css">
+    <!-- Modernizr-->
+    <script src="~/Scripts/modernizr.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?9ukd8d">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <!-- Navbar-->
+            <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+            <!-- Logo -->
+            <div class="site-branding">
+                <div class="inner">
+                    <!-- Site Logo-->
+                    <a class="site-logo light-logo" href="/Home/Index"><img src="img/logo/logo-light.png" alt="Longhorn Cinema"></a>
+                    <a class="site-logo logo-stuck" href="/Home/Index"><img src="img/logo/logo.png" alt="Longhorn Cinema"></a>
+                </div>
+            </div>
+            <!-- Main Navigation-->
+            <nav class="site-menu">
+                <ul>
+                    <li class="has-megamenu active">
+                        <a href="/Home/Index"><span>Home</span></a>
+                    </li>
+                    <li>
+                        <a href="/Movie/Index"><span>Movies</span></a>
+                    </li>
+                    @if (Request.IsAuthenticated)
+    {
+                <li class="nav-item">
+                    <a href="/Orders/Index"><span>Orders</span></a>
+                </li>
+
+if (User.IsInRole("Manager"))
+{
+
+                <li>
+                    <a href="/RoleAdmin/Index"><span>Manage Users</span></a>
+                </li>
+                <li>
+                    <a href="/MovieScheduler/AddEvent"><span>Schedule Movies</span></a>
+                </li>
+                <li>
+                    <a href="/Reports/Index"><span>Reports</span></a>
+                </li>
+}
+
+}
+                </ul>
+
+            </nav>
+
+            <!-- Toolbar-->
+            <div class="toolbar">
+                <div class="inner">
+                    <div class="tools">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            </ul>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <hr>
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

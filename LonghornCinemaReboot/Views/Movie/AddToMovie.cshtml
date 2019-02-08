@@ -1,0 +1,33 @@
+﻿@model LonghornCinemaReboot.Models.Movie
+
+@{
+    ViewBag.Title = "AddToMovie";
+}
+
+<h2>AddToMovie</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>RegistrationDetail</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Select a class:</label>
+        <div class="col-md-10">
+            @Html.DropDownList("SelectedGenres", (SelectList)ViewBag.AllGenres, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Actor/Genre to Movie" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

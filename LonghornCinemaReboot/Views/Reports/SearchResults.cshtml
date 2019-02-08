@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LonghornCinemaReboot.Models.Showing>
+@using LonghornCinemaReboot.Models
+@{
+    ViewBag.Title = "SearchResults";
+}
+
+<br />
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <p class="form-group">
+        Search: @Html.TextBox("SearchString", null, new { @class = "form-control" }) <br />
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Detailed Search", "ShowingSearch", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Show All", "SearchResults", null, new { @class = "btn btn-default" })
+    </p>
+}
+
+Displaying @ViewBag.SelectedMovies of @ViewBag.TotalMovies Showings
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SelectedMovie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialEvent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tickets)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelectedMovie.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialEvent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tickets)
+            </td>
+        </tr>
+    }
+
+</table>

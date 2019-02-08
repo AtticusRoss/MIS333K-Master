@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LonghornCinemaReboot.Models.Order>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+
+
+<!-- Page Content-->
+<div class="container padding-bottom-3x mb-2">
+    <div class="row">
+        <div class="col-lg-4">
+            <aside class="user-info-wrapper">
+                <div class="user-cover" style="background-image: url(img/account/user-cover-img.jpg);">
+                    <div class="info-label" data-toggle="tooltip" title="You currently have 622 Popcorn Points to spend"><i class="material-icons redeem"></i>622 points</div>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar"><a class="edit-avatar" href="#"><i class="material-icons edit"></i>Edit</a><img src="img/account/user-ava.jpg" alt="User"></div>
+                    <div class="user-data">
+                        <h5></h5><span>Birthday </span>
+                    </div>
+                </div>
+            </aside>
+            <nav class="list-group">
+                <a class="list-group-item active" href="/Accounts/Orders"><i class="icon-bag"></i>Orders<span class="badge badge-default badge-pill"></span></a>
+                <a class="list-group-item with-badge" href="/Accounts/Index"><i class="icon-head"></i>Profile</a>
+                <a class="list-group-item with-badge" href="/Accounts/Info"><i class="icon-heart"></i>Info<span class="badge badge-default badge-pill"></span></a>
+                <a class="list-group-item with-badge" href="/Accounts/CreditCards"><i class="icon-tag"></i>Credit Cards<span class="badge badge-default badge-pill"></span></a>
+            </nav>
+        </div>
+
+
+
+        <div class="col-lg-8">
+            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+            <div class="table-responsive text-sm">
+
+                <table class="table table-hover margin-bottom-none">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Notes)
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    <tbody>
+                        @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle"><a class="text-medium navi-link" href="/Orders/Details/@item.OrderID">@Html.DisplayFor(modelItem => item.OrderNumber)</a></td>
+                        <td class="align-middle">@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                        <td class="align-middle"><span class="d-inline-block bg-danger text-white text-xs p-1">@Html.DisplayFor(modelItem => item.Notes)</span></td>
+                        <td class="align-middle"><span class="text-medium">@Html.ActionLink("Edit", "Edit", "Orders", new { id = item.OrderID }, null) | @Html.ActionLink("Details", "Details", "Orders", new { id = item.OrderID }, null) | @Html.ActionLink("Delete", "Delete", "Orders", new {id = item.OrderID }, null) </span></td>
+                    </tr>
+        }
+                    </tbody>
+                </table>
+            </div>
+            <hr class="mb-3">
+
+            <div class="text-right"><a class="btn btn-outline-secondary mb-0" href="/Orders/Create"><i class="material-icons file_download"></i>&nbsp;Create New</a></div>
+        </div>
+    </div>
+</div>
+

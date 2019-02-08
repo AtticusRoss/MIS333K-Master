@@ -1,0 +1,45 @@
+﻿@model LonghornCinemaReboot.Models.Showing
+
+@{
+    ViewBag.Title = "ShowingDetails";
+}
+
+
+<h2>Showing Details</h2>
+
+<p><b>Showing ID:</b>@Model.ShowingID</p>
+
+<p><b>Showing Theater:</b>@Model.TheaterID</p>
+<p><b>Showing Date:</b>@Model.StartTime.Date</p>
+<p><b>Showing Start Time:</b>@Model.StartTime</p>
+<p><b>Showing End Time:</b>@Model.EndTime</p>
+<p><b>Special Event:</b>@Model.SpecialEvent</p>
+
+<div class="text-md-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/AddEvent"><i class="material-icons file_download"></i>&nbsp;Add Showing To Selected Day</a></div>
+<div class="text-md-center"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/DayCopier"><i class="material-icons file_download"></i>&nbsp;Copy Day</a></div>
+
+@using (Html.BeginForm("CancelShowing", "MovieScheduler", Model.ShowingID, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Cancel Showing" />
+        </div>
+    </div>
+
+}
+
+@using (Html.BeginForm("RescheduleShowing", "MovieScheduler", Model.ShowingID, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Reschedule Showing" />
+        </div>
+    </div>
+
+}

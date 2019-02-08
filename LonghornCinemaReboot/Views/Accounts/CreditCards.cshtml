@@ -1,0 +1,114 @@
+﻿@model LonghornCinemaReboot.Models.CreditCardViewModel
+
+
+@{
+    ViewBag.Title = "CreditCards";
+}
+
+<h2>CreditCards</h2>
+<div class="container padding-bottom-3x mb-2">
+    <div class="row">
+        <div class="col-lg-4">
+            <aside class="user-info-wrapper">
+                <div class="user-cover" style="background-image: url(img/account/user-cover-img.jpg);">
+                    <div class="info-label" data-toggle="tooltip" title="You currently have 622 Popcorn Points to spend"><i class="material-icons redeem"></i>622 points</div>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar"><a class="edit-avatar" href="#"><i class="material-icons edit"></i>Edit</a><img src="img/account/user-ava.jpg" alt="User"></div>
+                    <div class="user-data">
+                        <h5>Test</h5><span>Birthday</span>
+                    </div>
+                </div>
+            </aside>
+            <nav class="list-group">
+                <a class="list-group-item with-badge" href="/Accounts/Orders"><i class="icon-bag"></i>Orders<span class="badge badge-default badge-pill"></span></a>
+                <a class="list-group-item active" href="/Accounts/Index"><i class="icon-head"></i>Profile</a>
+                <a class="list-group-item with-badge" href="/Accounts/Info"><i class="icon-heart"></i>Info<span class="badge badge-default badge-pill"></span></a>
+                <a class="list-group-item with-badge" href="/Accounts/CreditCards"><i class="icon-tag"></i>Credit Cards<span class="badge badge-default badge-pill"></span></a>
+            </nav>
+        </div>
+
+
+        <div class="col-lg-8">
+            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+
+            @using (Html.BeginForm("CreditCards", "Accounts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreditCardOne, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreditCardOne, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreditCardOne, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOne, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOne, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOne, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CV2One, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CV2One, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CV2One, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreditCardTwo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreditCardTwo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreditCardTwo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTwo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateTwo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateTwo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CV2Two, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CV2Two, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CV2Two, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Change Credit Card Numbers" class="btn btn-default" />
+            </div>
+        </div>
+}
+            <h4>Products</h4>
+            <table class="table table-sm table-striped table-hover">
+                <tr>
+                    <th>CreditCardOne</th>
+                    <th>CreditCardTypeOne</th>
+                    <th>DateOne</th>
+                    <th>CV2One</th>
+                </tr>
+
+            <tr>
+                <td>@Html.DisplayFor(model => model.CreditCardOne)</td>
+                <td>@Html.DisplayFor(model => model.CreditCardTypeOne)</td>
+                <td>@Html.DisplayFor(model => model.DateOne)</td>
+                <td>@Html.DisplayFor(model => model.CV2One)</td>
+            </tr>
+            </table>
+        </div>
+    </div>
+</div>

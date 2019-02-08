@@ -1,0 +1,20 @@
+﻿@using LonghornCinemaReboot.Controllers;
+@{
+    ViewBag.Title = "DateSearch";
+}
+
+<h2>Date Search</h2>
+
+<div class="text-danger">@ViewBag.Message</div>
+
+@using (Html.BeginForm("DisplayShowingSearchResults", "Movie", FormMethod.Get))
+{
+    <p class="form-group">
+        <!--Date picker for year-->
+        <div class="form-group">
+            Showing Date: <input type="date" name="datSelectedDate" class="form-control" /><br />
+        </div>
+        <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+}
+

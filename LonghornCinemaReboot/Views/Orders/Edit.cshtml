@@ -1,0 +1,64 @@
+﻿@model LonghornCinemaReboot.Models.Order
+@using LonghornCinemaReboot.Models
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Orders</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OrderID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<h4>Products</h4>
+<table class="table table-sm table-striped table-hover">
+    <tr>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+    </tr>
+    @foreach (Ticket t in Model.Tickets)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => t.Showing.SelectedMovie)</td>
+            <td>@Html.DisplayFor(modelItem => t.Showing.TheaterID)</td>
+            <td>@Html.DisplayFor(modelItem => t.Showing.StartTime)</td>
+            <td>@Html.DisplayFor(modelItem => t.Seat)</td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Add Another Movie", "AddToOrder", new { OrderID = Model.OrderID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit Existing Items", "RemoveFromOrder", new { OrderID = Model.OrderID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

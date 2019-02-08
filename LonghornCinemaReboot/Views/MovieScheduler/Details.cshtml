@@ -1,0 +1,97 @@
+﻿@model LonghornCinemaReboot.Models.Day
+@using LonghornCinemaReboot.Models;
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>Details</h1>
+
+<h3>Selected Day: @Model.DayStartTime.DayOfWeek, @Model.DayStartTime.Day/@Model.DayStartTime/@Model.DayStartTime.Year</h3>
+
+
+<h2>Theater One</h2>
+
+<div class="text-md-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/AddEvent"><i class="material-icons file_download"></i>&nbsp;Add Showing To Selected Day</a></div>
+<div class="text-md-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/DayCopier"><i class="material-icons file_download"></i>&nbsp;Copy Day</a></div>
+
+<table class="table table-sm table-striped table-hover">
+    <tr>
+        <th>Showing Start Time</th>
+
+        <th>Showing End Time</th>
+        <th>Cancel Showing</th>
+    </tr>
+    @foreach (Showing sel_showing in ViewBag.TheaterOneMovies)
+    {
+        <tr>
+
+            <td>
+                @sel_showing.StartTime
+            </td>
+            <td>
+                @sel_showing.EndTime
+            </td>
+            <td>
+                <div class="text-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/ShowingDetails/@sel_showing.ShowingID"><i class="material-icons file_download"></i>&nbsp;Showing Details</a></div>
+            </td>
+        </tr>
+    }
+</table>
+
+<h2>Theater Two</h2>
+<div class="text-md-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/AddEvent"><i class="material-icons file_download"></i>&nbsp;Add Showing To Selected Day</a></div>
+<div class="text-md-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/DayCopier"><i class="material-icons file_download"></i>&nbsp;Copy Day</a></div>
+
+<table class="table table-sm table-striped table-hover">
+    <tr>
+        <th>Movie</th>
+        <th>Showing Start Time</th>
+        <th>Showing Run Time</th>
+        <th>Showing End Time</th>
+        <th>Cancel Showing</th>
+    </tr>
+    @foreach (Showing sel_showing in ViewBag.TheaterTwoMovies)
+    {
+        <tr>
+            <td>
+                @sel_showing.SelectedMovie.Title
+            </td>
+            <td>
+                @sel_showing.StartTime
+            </td>
+            <td>
+                @sel_showing.SelectedMovie.RunTime
+            </td>
+            <td>
+                @sel_showing.EndTime
+            </td>
+            <td>
+                <div class="text-right"><a class="btn btn-outline-secondary mb-0" href="/MovieScheduler/ShowingDetails/@sel_showing.ShowingID"><i class="material-icons file_download"></i>&nbsp;Showing Details</a></div>
+            </td>
+        </tr>
+    }
+</table>
+
+<h2>Select A Different Day</h2>
+@using (Html.BeginForm("Index", "MovieScheduler", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>What Day Would You To Work On?</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <!--Multiselect list for Movies-->
+    <div class="form-group" align="right" action="/action_page.php">
+        Selected Date:
+        <input type="date" name="showing_date">
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Work On Selected Day" />
+        </div>
+    </div>
+
+}

@@ -1,0 +1,85 @@
+﻿@model LonghornCinemaReboot.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="container padding-bottom-3x mb-2">
+    <div class="row">
+        <div class="col-lg-4">
+            <aside class="user-info-wrapper">
+                <div class="user-cover" style="background-image: url(img/account/user-cover-img.jpg);">
+                    <div class="info-label" data-toggle="tooltip" title="You currently have 622 Popcorn Points to spend"><i class="material-icons redeem"></i>622 points</div>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar"><a class="edit-avatar" href="#"><i class="material-icons edit"></i>Edit</a><img src="img/account/user-ava.jpg" alt="User"></div>
+                    <div class="user-data">
+                        <h5>@Model.FirstName</h5><span>Birthday @Model.Birthday</span>
+                    </div>
+                </div>
+            </aside>
+            <nav class="list-group">
+                <a class="list-group-item with-badge" href="/Accounts/Orders"><i class="icon-bag"></i>Orders<span class="badge badge-default badge-pill"></span></a>
+                <a class="list-group-item active" href="/Accounts/Index"><i class="icon-head"></i>Profile</a>
+                <a class="list-group-item with-badge" href="/Accounts/Info"><i class="icon-heart"></i>Info<span class="badge badge-default badge-pill"></span></a>
+                <a class="list-group-item with-badge" href="/Accounts/CreditCards"><i class="icon-tag"></i>Credit Cards<span class="badge badge-default badge-pill"></span></a>
+            </nav>
+        </div>
+
+
+
+        
+
+
+
+
+
+
+
+        <div class="col-lg-8">
+            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+
+            @using (Html.BeginForm("ChangePassword", "Accounts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.NewPassword, new { @class = "col-md-6 control-label" })
+            <div class="col-md-6">
+                @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-6 control-label" })
+            <div class="col-md-6">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-6 control-label" })
+            <div class="col-md-6">
+                @Html.TextBox("Email", @Model.Email, new { @class = "form-control", disabled = "disabled"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.OldPassword, new { @class = "col-md-6 control-label" })
+            <div class="col-md-6">
+                @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Change password" class="btn btn-default" />
+            </div>
+        </div>
+}
+        </div>
+    </div>
+</div>

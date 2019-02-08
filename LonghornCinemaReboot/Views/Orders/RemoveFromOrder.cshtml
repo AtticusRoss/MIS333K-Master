@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LonghornCinemaReboot.Models.Ticket>
+
+@{
+    ViewBag.Title = "RemoveFromOrder";
+}
+
+<h2>RemoveFromOrder</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Showing.SelectedMovie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Showing.SelectedMovie.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Ticket", new { id = item.TicketID }, null) |
+                @Html.ActionLink("Delete", "Delete", "Ticket", new { id = item.TicketID }, null)
+            </td>
+        </tr>
+    }
+
+</table>

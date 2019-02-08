@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "RescheduleShowing";
+}
+
+<h2>RescheduleShowing</h2>
+
+@model LonghornCinemaReboot.Models.Showing
+
+@using (Html.BeginForm("AddEvent", "MovieScheduler", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Reschedule Movie</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <!--Multiselect list for Movies-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedMovie.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.SelectedMovie.Title, new { @Value = ViewBag.MovieTitle, @class = "form-control", @disabled = "disabled" })
+        </div>
+    </div>
+    <div class="form-group" align="right">
+            <input type="radio" name="theaterid" value="TheaterOne"> Theater One<br>
+            <input type="radio" name="theaterid" value="TheaterTwo"> Theater Two<br>
+    </div>
+
+    <div class="form-group" align="right">
+            <input type="checkbox" name="specialevent" value="specialeventtrue">Special Event
+    </div>
+    <div class="form-group" align="right">
+            <input type="text" name="starttime"> Start Time<br>
+    </div>
+    <div class="form-group" align="right" action="/action_page.php">
+            Selected Date:
+            <input type="date" name="showing_date">
+
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add to Schedule" />
+        </div>
+    </div>
+
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm("Index", "MovieScheduler", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{    
+    @Html.AntiForgeryToken()
+
+    <h4>What Day Would You To Work On?</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <!--Multiselect list for Movies-->
+    <div class="form-group" align="right" action="/action_page.php">
+            Selected Date:
+            <input type="date" name="showing_date">
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Work On Selected Day" class="btn btn-default" />
+        </div>
+    </div>
+
+}
+
+
+
+
